@@ -1,0 +1,7 @@
+
+RewriteEngine on
+DirectoryIndex index.html
+RewriteCond %{HTTP_HOST} ^cmgarchitects\.ie$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.cmgarchitects\.ie$
+RewriteRule ^/?$ "http\:\/\/www\.hmg\.ie" [R=301,L]
+

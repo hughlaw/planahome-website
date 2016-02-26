@@ -1,5 +1,4 @@
 <?php
-// $Id: imagefield_widget.inc,v 1.44 2010/06/29 22:46:18 quicksketch Exp $
 
 /**
  * @file
@@ -18,7 +17,7 @@ function imagefield_widget_settings_form($widget) {
 
   $form['max_resolution'] = array(
     '#type' => 'textfield',
-    '#title' => t('Maximum resolution for Images'),
+    '#title' => t('Maximum dimensions for images'),
     '#default_value' => !empty($widget['max_resolution']) ? $widget['max_resolution'] : 0,
     '#size' => 15,
     '#maxlength' => 10,
@@ -27,7 +26,7 @@ function imagefield_widget_settings_form($widget) {
   );
   $form['min_resolution'] = array(
     '#type' => 'textfield',
-    '#title' => t('Minimum resolution for Images'),
+    '#title' => t('Minimum dimensions for images'),
     '#default_value' => !empty($widget['min_resolution']) ? $widget['min_resolution'] : 0,
     '#size' => 15,
     '#maxlength' => 10,
@@ -137,8 +136,9 @@ function imagefield_widget_settings_form($widget) {
  * to the $form_state variable.
  */
 function _imagefield_widget_settings_default_validate($element, &$form_state) {
-  // Skip this validation if there isn't a default file uploaded at all.
-  if (!is_uploaded_file($_FILES['files']['tmp_name']['default_image_upload'])) {
+  // Skip this validation if there isn't a default file uploaded at all or if
+  // validation has already failed because of another error.
+  if (!is_uploaded_file($_FILES['files']['tmp_name']['default_image_upload']) || form_set_error()) {
     return;
   }
 
@@ -159,12 +159,12 @@ function _imagefield_widget_settings_default_validate($element, &$form_state) {
     return;
   }
 
-  // Remove old image (if any) & clean up database.
+  // Remove the old default image if any.
   $old_default = $form_state['values']['default_image'];
   if (!empty($old_default['fid'])) {
-    if (file_delete(file_create_path($old_default['filepath']))) {
-      db_query('DELETE FROM {files} WHERE fid = %d', $old_default['fid']);
-    }
+    // Set a flag to not count this instance in hook_file_references().
+    $old_default['imagefield_type_name'] = $form_state['values']['type_name'];
+    field_file_delete($old_default);
   }
 
   // Make the file permanent and store it in the form.

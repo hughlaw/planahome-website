@@ -1,11 +1,10 @@
 <?php
-// $Id: views_cache.test,v 1.1.2.1 2009/12/22 00:38:03 merlinofchaos Exp $
 /**
  * @file
  *   test cache system.
  */
 
-module_load_include('inc', 'views', 'tests/views_query');
+module_load_include('test', 'views', 'tests/views_query');
 /**
  * Basic test for pluggable caching.
  */
@@ -144,4 +143,3 @@ class ViewsCacheTest extends ViewsSqlTest {
     $this->assertEqual(6, count($view->result), t('The number of returned rows match.'));
   }
 }
-

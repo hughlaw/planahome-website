@@ -1,5 +1,4 @@
 <?php
-// $Id: views_plugin_row_aggregator_rss.inc,v 1.1.2.1 2009/12/28 21:11:50 merlinofchaos Exp $
 /**
  * @file
  * Contains the Aggregator Item RSS row style plugin.
@@ -66,4 +65,3 @@ class views_plugin_row_aggregator_rss extends views_plugin_row {
     return theme($this->theme_functions(), $this->view, $this->options, $item);
   }
 }
-
