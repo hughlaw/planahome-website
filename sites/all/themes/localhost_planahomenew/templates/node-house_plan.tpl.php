@@ -116,14 +116,14 @@ Style: <?php print $node->field_style[0]['view'] ?> <?php print $node->field_sty
 <?php
 if ( arg(0) == 'node' && is_numeric(arg(1)) ) {
   $nid = arg(1);
-   // Now you can do something with the nid
+   // Now you can something with the nid
 }
 ?>
 <?php
 global $base_url;
 ?>
 <a href="<?php echo $base_url; ?>/estimator?nid=<?php echo $nid ?>" class="noborder"><img id="calc-button" src="<?php echo $base_url; ?>/sites/all/themes/localhost_planahomenew/images/calc-button.png" alt="Calculate the cost to build this house" title="Calculate the cost to build this house" /></a><br />
-
+<!--  -->
 <hr />
 <?php
 $viewName = 'plan_contact_page';

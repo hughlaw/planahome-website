@@ -1,5 +1,4 @@
 <?php
-// $Id: comment.views.inc,v 1.32.2.7 2009/12/28 21:11:50 merlinofchaos Exp $
 /**
  * @file
  * Provide views data and handlers for comment.module
@@ -86,7 +85,7 @@ function comment_views_data() {
       'handler' => 'views_handler_sort',
     ),
     'argument' => array(
-      'handler' => 'views_handler_argument',
+      'handler' => 'views_handler_argument_numeric',
     ),
   );
 
@@ -181,10 +180,10 @@ function comment_views_data() {
       'handler' => 'views_handler_filter_date',
     ),
   );
-  
+
   $data['comments']['timestamp_fulldate'] = array(
     'title' => t('Created date'),
-    'help' => t('In the form of CCYYMMDD.'),
+    'help' => t('Date in the form of CCYYMMDD.'),
     'argument' => array(
       'field' => 'timestamp',
       'handler' => 'views_handler_argument_node_created_fulldate',
@@ -193,7 +192,7 @@ function comment_views_data() {
 
   $data['comments']['timestamp_year_month'] = array(
     'title' => t('Created year + month'),
-    'help' => t('In the form of YYYYMM.'),
+    'help' => t('Date in the form of YYYYMM.'),
     'argument' => array(
       'field' => 'timestamp',
       'handler' => 'views_handler_argument_node_created_year_month',
@@ -202,7 +201,7 @@ function comment_views_data() {
 
   $data['comments']['timestamp_year'] = array(
     'title' => t('Created year'),
-    'help' => t('In the form of YYYY.'),
+    'help' => t('Date in the form of YYYY.'),
     'argument' => array(
       'field' => 'timestamp',
       'handler' => 'views_handler_argument_node_created_year',
@@ -211,7 +210,7 @@ function comment_views_data() {
 
   $data['comments']['timestamp_month'] = array(
     'title' => t('Created month'),
-    'help' => t('In the form of MM (01 - 12).'),
+    'help' => t('Date in the form of MM (01 - 12).'),
     'argument' => array(
       'field' => 'timestamp',
       'handler' => 'views_handler_argument_node_created_month',
@@ -220,7 +219,7 @@ function comment_views_data() {
 
   $data['comments']['timestamp_day'] = array(
     'title' => t('Created day'),
-    'help' => t('In the form of DD (01 - 31).'),
+    'help' => t('Date in the form of DD (01 - 31).'),
     'argument' => array(
       'field' => 'timestamp',
       'handler' => 'views_handler_argument_node_created_day',
@@ -229,7 +228,7 @@ function comment_views_data() {
 
   $data['comments']['timestamp_week'] = array(
     'title' => t('Created week'),
-    'help' => t('In the form of WW (01 - 53).'),
+    'help' => t('Date in the form of WW (01 - 53).'),
     'argument' => array(
       'field' => 'timestamp',
       'handler' => 'views_handler_argument_node_created_week',
@@ -239,14 +238,14 @@ function comment_views_data() {
   // status (approved or not)
   $data['comments']['status'] = array(
     'title' => t('In moderation'),
-    'help' => t('Whether or not the comment is currently in moderation.'),
+    'help' => t('Whether or not the comment is currently in the moderation queue.'),
     'field' => array(
       'handler' => 'views_handler_field_boolean',
       'click sortable' => TRUE,
     ),
     'filter' => array(
       'handler' => 'views_handler_filter_boolean_operator',
-      'label' => t('Moderated'),
+      'label' => t('In the moderation queue'),
       'type' => 'yes-no',
     ),
     'sort' => array(
@@ -304,24 +303,45 @@ function comment_views_data() {
   );
 
   $data['comments']['nid'] = array(
-    'title' => t('Node'),
-    'help' => t('The node the comment is a reply to.'),
+    'title' => t('Nid'),
+    'help' => t('The node ID to which the comment is a reply to.'),
     'relationship' => array(
+      'title' => t('Content'),
+      'help' => t('The content to which the comment is a reply to.'),
       'base' => 'node',
       'base field' => 'nid',
       'handler' => 'views_handler_relationship',
       'label' => t('Node'),
     ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_numeric',
+    ),
+    'field' => array(
+      'handler' => 'views_handler_field_numeric',
+    ),
   );
 
   $data['comments']['uid'] = array(
-    'title' => t('User'),
+    'title' => t('Uid'),
     'help' => t("The User ID of the comment's author."),
     'relationship' => array(
+      'title' => t('User'),
       'base' => 'users',
       'base field' => 'uid',
       'handler' => 'views_handler_relationship',
       'label' => t('User'),
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_numeric',
+    ),
+    'field' => array(
+      'handler' => 'views_handler_filter_user_name',
     ),
   );
 
@@ -362,7 +382,7 @@ function comment_views_data() {
     'title' => t('Last comment time'),
     'help' => t('Date and time of when the last comment was posted.'),
     'field' => array(
-      'handler' => 'views_handler_field_date',
+      'handler' => 'views_handler_field_last_comment_timestamp',
       'click sortable' => TRUE,
     ),
     'sort' => array(
@@ -418,6 +438,28 @@ function comment_views_data() {
     ),
     'filter' => array(
       'handler' => 'views_handler_filter_ncs_last_updated',
+    ),
+  );
+
+  // last_comment_uid
+  $data['node_comment_statistics']['last_comment_uid'] = array(
+    'title' => t('Last comment uid'),
+    'help' => t('The User ID of the author of the last comment of a node.'),
+    'relationship' => array(
+      'title' => t('Last comment author'),
+      'base' => 'users',
+      'base field' => 'uid',
+      'handler' => 'views_handler_relationship',
+      'label' => t('Last comment author'),
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_numeric',
+    ),
+    'field' => array(
+      'handler' => 'views_handler_filter_user_name',
     ),
   );
 
@@ -559,6 +601,9 @@ function comment_views_handlers() {
       ),
       'views_handler_field_node_comment' => array(
         'parent' => 'views_handler_field',
+      ),
+      'views_handler_field_last_comment_timestamp' => array(
+        'parent' => 'views_handler_field_date',
       ),
 
       // sort handlers

@@ -1,5 +1,4 @@
 <?php
-// $Id: views_plugin_argument_default_current_user.inc,v 1.1.2.1 2009/11/26 00:35:16 merlinofchaos Exp $
 /**
  * @file
  * Contains the current user argument default plugin.
@@ -16,4 +15,3 @@ class views_plugin_argument_default_current_user extends views_plugin_argument_d
     return $user->uid;
   }
 }
-

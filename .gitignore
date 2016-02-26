@@ -7,3 +7,6 @@ sites/*/private
 
 # Ignore FTP configuration
 .ftpconfig
+
+# Ignore non site files
+"Non Site Files"/*

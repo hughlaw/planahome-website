@@ -1,0 +1,184 @@
+HMG-CMG Stylesheet
+
+body{
+background-color: #ffffff;
+}
+
+p, li{
+font-family: Arial, sans-serif; 
+font-size: 14px;
+line-height: 22px;
+color: #000000;}
+
+h4{
+font-family: Arial, sans-serif; 
+font-size: 14px;
+font-weight:bold;
+line-height: 22px;
+color: #ff9933;
+letter-spacing:0.08em;
+}
+
+a:link {
+text-decoration: none;
+color: #000000;
+}
+
+a:hover {
+text-decoration: none;
+color: #000000;
+}
+
+a:active {
+text-decoration: none;
+color: #000000;
+}
+
+a:visited {
+text-decoration: none;
+color: #000000;
+}
+
+a:visited:hover {
+text-decoration: none;
+color: #000000;
+}
+
+/*Menu background*/
+
+td.ghost
+background-repeat:no-repeat;
+}
+
+/*footer*/
+td.footer{
+font-family: Arial, sans-serif; 
+font-size: 9px;
+line-height:13px;
+font-color: #ffffff;}
+
+a.footer:link {
+text-decoration: none;
+color: #000;
+}
+
+a.footer:hover {
+text-decoration: underline;
+color: #000;
+}
+
+a.footer:active {
+text-decoration: none;
+color: #000;
+}
+
+a.footer:visited {
+text-decoration: none;
+color: #000;
+}
+
+a.footer:visited:hover {
+text-decoration: underline;
+color: #000;
+}
+
+/*HMG & CMG Architects*/
+.title{
+font-family: Arial, sans-serif; font-size: 13px; color:#666666; 
+font-weight:bold;
+letter-spacing:0.06em;
+}
+
+/*Category of Portfolio*/
+.category{
+font-family: Arial, sans-serif; font-size: 34px; color:#cccccc; 
+font-weight:900;
+letter-spacing:0.08em;
+}
+
+/*View Portfolio*/
+.viewp{
+font-family: Arial, sans-serif; font-size: 11px; color:#ffffff; 
+font-weight:bold;
+line-height:15px;
+letter-spacing:0.15em;
+}
+
+a.viewp:link,a.viewp:hover,a.viewp:active,a.viewp:visited,a.viewp:visited:hover{
+text-decoration: none;
+color: #ffffff;
+}
+
+/*content*/
+td.content{
+font-family: Arial, Helvetica, sans-serif; 
+font-size: 12px;
+line-height:16px;
+font-color: #000000;
+}
+
+.td.text{
+font-family: Arial, Helvetica, sans-serif; 
+font-size: 12px;
+line-height:16px;
+font-color: #000000;
+}
+
+.textsmall{
+font-family: Arial, Helvetica, sans-serif; 
+font-size: 10px;
+line-height:12px;
+font-color: #000000;
+}
+
+/*animation on logo*/
+#h-c{
+position:absolute; 
+top:74px; 
+left:45px;
+//z-index:2;
+}
+
+/*Flash Logo*/
+#flashlogo{
+position:absolute; 
+top:470px; 
+left:35px;
+}
+
+.bkgd{
+background-repeat:no-repeat;}
+
+/*border around images*/
+a.text:link IMG{
+border: 2px solid white;
+}
+
+a.text:visited IMG{
+border: 2px solid white;
+}
+
+/* project management table */
+
+.button{
+font-size: 11px;
+font-family: Arial, Helvetica, sans-serif;
+background-color: #BFD2C5;
+border-style: outset;
+}
+
+.textmed{
+font-size: 12px;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.contentArea1 {
+position: absolute; 
+width:200px; 
+visibility:hidden; 
+z-index:1; 
+padding:2px; 
+height:100px; 
+left:130px; 
+top:320px;
+}
