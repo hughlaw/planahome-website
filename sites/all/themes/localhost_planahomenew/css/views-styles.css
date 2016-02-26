@@ -1,0 +1,32 @@
+/* $Id$ */
+
+/**
+ * @file
+ * Views Styling
+ */
+ 
+ /* The following information affects the styling for the browse plans pages
+ ----------------------------------------------------------------------------*/
+
+.views-view-grid {
+	margin: 0 auto 0 auto;
+}
+
+.views-view-grid td {
+	width: 220px;
+	padding:10px;
+	vertical-align: top;
+}
+
+.views-exposed-form {
+	background-color: #333;
+	padding:20px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+}
+
+.views-exposed-widget {
+	width:25%;
+	padding:0 !important;
+}
