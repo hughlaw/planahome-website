@@ -126,8 +126,7 @@ global $base_url;
 <hr />
 <h2>Package Prices</h2>
 <p>Bronze Price: <?php print $node->field_bronze_price[0]['view'] ?><br />
-Silver Price: <?php print $node->field_silver_price[0]['view'] ?><br />
-Gold Price: <?php print $node->field_gold_price[0]['view'] ?></p>
+Silver Price: <?php print $node->field_silver_price[0]['view'] ?></p>
 <p>All prices are exclusive of VAT</p>
 <hr />
 <?php
